@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  use-forward-headers: true
+  forward-headers-strategy: framework
+  tomcat:
+    max-swallow-size: -1
+
+spring:
+  datasource:
+    url: ${app.datasource.url}
+    username: ${app.datasource.username}
+    password: ${app.datasource.password}
+    max-active: 10
+    max-idle: 8
+    min-idle: 8
+    max-wait: 10000
+    min-evictable-idle-time-millis: 1000
+
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: validate
+    properties.hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      format_sql: true
+      jdbc:
+        time_zone: UTC
+
+flyway:
+  enable: true
+  baseline-on-migrate: true
+  baseline-version: 1
+  driver-class-name: org.postgresql.Driver
+  url: ${app.datasource.url}
+  username: ${app.datasource.username}
+  password: ${app.datasource.password}
+
+app:
+  datasource:
+    vendor: postgres
+    url: ${SHOP_DB_URL}
+    username: ${SHOP-DB_USER}
+    password: ${SHOP_DB_PASSWORD}
